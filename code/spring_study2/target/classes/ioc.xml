@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--在进行框架配置的时候，可以使用xml文件，也可以使用注解的方式
+    很多同学觉得xml的方式比较麻烦，但是xml的配置方式还是要学习的，因为在项目开发过程中
+    很多情况下是xml和注解一起工作，而且xml配置的方式比较完整
+    -->
+
+    <!--根据属性值赋值的时候，参数的name属性取决于set方法后面的参数首字符小写的名称-->
+
+<!--    <bean id="person" class="com.chenxk.bean.Person">-->
+<!--        <property name="id" value="1"></property>-->
+<!--        <property name="name" value="张三"></property>-->
+<!--        <property name="age" value="14"></property>-->
+<!--        <property name="gender" value="男" />-->
+<!--    </bean>-->
+
+<!--    &lt;!&ndash;使用构造器方法赋值的时候，参数的name属性有构造方法的参数名称决定&ndash;&gt;-->
+<!--    <bean id="person2" class="com.chenxk.bean.Person">-->
+<!--        <constructor-arg name="id" value="2" />-->
+<!--        <constructor-arg name="age" value="22" />-->
+<!--        <constructor-arg name="name" value="lisi" />-->
+<!--        <constructor-arg name="gender" value="男" />-->
+<!--    </bean>-->
+
+<!--    &lt;!&ndash;使用构造器方法赋值的时候，参数的name属性可以省略不屑，但是要注意保证参数值与构造器的参数列表的顺序一致&ndash;&gt;-->
+<!--    <bean id="person3" class="com.chenxk.bean.Person">-->
+<!--        <constructor-arg name="id" value="2" />-->
+<!--        <constructor-arg name="name" value="lisi" />-->
+<!--        <constructor-arg name="age" value="22" />-->
+<!--        <constructor-arg name="gender" value="男" />-->
+<!--    </bean>-->
+
+<!--    &lt;!&ndash;当有多个相同参数的个数构造方法存在的时候，默认情况下是覆盖的过程，后面的构造方法会覆盖前面的构造方法&ndash;&gt;-->
+<!--    <bean id="person4" class="com.chenxk.bean.Person">-->
+<!--        <constructor-arg name="id" value="2" />-->
+<!--        <constructor-arg name="name" value="wangwu" />-->
+<!--        <constructor-arg name="age" value="22" />-->
+<!--    </bean>-->
+
+<!--    &lt;!&ndash;-->
+<!--    使用p命名空间来给属性赋值-->
+<!--    &ndash;&gt;-->
+<!--    <bean id="person5" class="com.chenxk.bean.Person" p:id="5" p:name="maliu" p:age="18" p:gender="女" />-->
+
+
+<!--    <bean id="person6" class="com.chenxk.bean.Person">-->
+<!--        <property name="id" value="6"></property>-->
+<!--        <property name="name" value="张三6"></property>-->
+<!--        <property name="age" value="16"></property>-->
+<!--        <property name="gender" value="男6" />-->
+<!--&lt;!&ndash;        给数组赋值,使用array标签&ndash;&gt;-->
+<!--&lt;!&ndash;        <property name="hobbies" value="book,girl,movie" />&ndash;&gt;-->
+<!--        <property name="hobbies">-->
+<!--            <array>-->
+<!--                <value>book</value>-->
+<!--                <value>girl</value>-->
+<!--                <value>game</value>-->
+<!--            </array>-->
+
+<!--        </property>-->
+<!--&lt;!&ndash;        给引用类型赋值，可以使用ref引入外部bean&ndash;&gt;-->
+<!--        <property name="address" ref="address" />-->
+<!--&lt;!&ndash;        给list赋值&ndash;&gt;-->
+<!--        <property name="list">-->
+<!--            <list>-->
+<!--&lt;!&ndash;                使用内部bean，无法从IOC容器中直接获取对象的值&ndash;&gt;-->
+<!--                <bean class="com.chenxk.bean.Address">-->
+<!--                    <property name="province" value="浙江省" />-->
+<!--                    <property name="city" value="温州市" />-->
+<!--                    <property name="town" value="苍南县" />-->
+<!--                </bean>-->
+<!--                <bean class="com.chenxk.bean.Address">-->
+<!--                    <property name="province" value="浙江省" />-->
+<!--                    <property name="city" value="温州市" />-->
+<!--                    <property name="town" value="鹿城区" />-->
+<!--                </bean>-->
+<!--&lt;!&ndash;                使用外部bean，可以从IOC容器中随意获取对象的值&ndash;&gt;-->
+<!--                <ref bean="address"></ref>-->
+<!--            </list>-->
+
+<!--        </property>-->
+<!--&lt;!&ndash;        给set赋值&ndash;&gt;-->
+<!--        <property name="sets">-->
+<!--            <set>-->
+<!--                <value>zhangsan</value>-->
+<!--                <value>zhangsan</value>-->
+<!--                <value>lisi</value>-->
+<!--            </set>-->
+<!--        </property>-->
+<!--&lt;!&ndash;        给map赋值&ndash;&gt;-->
+<!--        <property name="maps">-->
+<!--            <map>-->
+<!--                <entry key="a" value="aaa"></entry>-->
+<!--                <entry key="address" value-ref="address"></entry>-->
+<!--                <entry key="address2">-->
+<!--                    <bean class="com.chenxk.bean.Address">-->
+<!--                        <property name="province" value="浙江省" />-->
+<!--                        <property name="city" value="温州市" />-->
+<!--                        <property name="town" value="鹿城区" />-->
+<!--                    </bean>-->
+<!--                </entry>-->
+<!--                <entry>-->
+<!--                    <key>-->
+<!--                        <value>hehe</value>-->
+<!--                    </key>-->
+<!--                    <value>haha</value>-->
+<!--                </entry>-->
+<!--                <entry key="list">-->
+<!--                    <list>-->
+<!--                        <value>1111</value>-->
+<!--                        <value>2222</value>-->
+<!--                    </list>-->
+<!--                </entry>-->
+<!--            </map>-->
+<!--        </property>-->
+<!--&lt;!&ndash;给properties赋值&ndash;&gt;-->
+<!--        <property name="properties">-->
+<!--            <props>-->
+<!--                <prop key="aaa">aaa</prop>-->
+<!--                <prop key="222">bbb</prop>-->
+<!--            </props>-->
+<!--        </property>-->
+<!--    </bean>-->
+<!--    <bean id="address" class="com.chenxk.bean.Address">-->
+<!--        <property name="province" value="浙江省" />-->
+<!--        <property name="city" value="杭州市" />-->
+<!--        <property name="town" value="西湖区" />-->
+<!--    </bean>-->
+<!--    bean之间的继承关系
+        可以使用abstract标签定义抽象bean，无法进行实例化-->
+<!--    <bean id="parent" class="com.chenxk.bean.Person" abstract="true">-->
+<!--        <property name="id" value="7"></property>-->
+<!--        <property name="name" value="张三7"></property>-->
+<!--        <property name="age" value="17"></property>-->
+<!--        <property name="gender" value="男7" />-->
+<!--    </bean>-->
+<!--    可以通过parent属性来获取父类bean中的某些属性值-->
+<!--    <bean id="son" class="com.chenxk.bean.Person" parent="parent">-->
+<!--        <property name="name" value="hehe" />-->
+<!--    </bean>-->
+<!--    创建bean的时候依赖关系
+        当bean对象被创建的时候，是按照xml哦欸之文件定义的顺序创建的，谁在前，谁就先被创建
+        如果需要干扰创建的顺序，可以使用depends-on属性
+        一般在实际工作中不必在意bean创建的顺序，无论谁先创建，需要依赖的对象在创建完成之后都会进行实现
+        -->
+<!--    <bean id="address" class="com.chenxk.bean.Person" depends-on="person">-->
+
+<!--    </bean>-->
+<!--    <bean id="person" class="com.chenxk.bean.Person">-->
+
+<!--    </bean>-->
+
+<!--    设置bean对象的生命周期
+        通过scope属性可以指定当前bean的作用域
+        singleton：单例模式，从IOC容器中获取的都是同一个对象，默认的作用域
+        prototype：多例模式，从IOC容器中获取的对象每次都是新创建的
+
+        在spring4.x的版本中害包含另外两种作用域：
+        request：每次发送请求都会有一个新的对象
+        session：每次会话都会有一个新的对象
+                几乎不用，从来没用过，因此在5版本的时候被淘汰
+        注意：
+            如果是singleton作用域的话，每次在创建IOC容器完成之前此对象已经创建完成
+            如果是prototype作用域的话，每次是在需要用到此对象的时候才会创建-->
+<!--    <bean id="person2" class="com.chenxk.bean.Person" scope="singleton"></bean>-->
+<!--    利用工厂方法创建bean-->
+<!--    静态工厂-->
+<!--    <bean id="person" class="com.chenxk.factory.PersonStaticFactory" factory-method="getInstance">-->
+<!--        <constructor-arg value="lisi"></constructor-arg>-->
+<!--    </bean>-->
+<!--实例工厂：先创建工厂实力，然后调用工厂实例的方法-->
+<!--    <bean id="personInstanceFactory" class="com.chenxk.factory.PersonInstanceFactory" />-->
+<!--    <bean id="person2" class="com.chenxk.bean.Person" factory-bean="personInstanceFactory"-->
+<!--          factory-method="getPerson">-->
+<!--        <constructor-arg value="wangwu" />-->
+
+<!--    </bean>-->
+
+<!--    <bean id="factoryBean" class="com.chenxk.factory.MyFactoryBean"></bean>-->
+
+<!--    <bean id="person3" class="com.chenxk.bean.Person" init-method="init" destroy-method="destroy"></bean>-->
+<!--    spring管理第三方bean-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="username" value="root"></property>
+        <property name="password" value="zse4$RFV"></property>
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/demo"></property>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+     </bean>
+
+    <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
+    <bean id="dataSource2" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+        <property name="url"
+                  value="${jdbc.url}"></property>
+        <property name="driverClassName" value="${jdbc.driverClassName}"></property>
+    </bean>
+
+
+</beans>

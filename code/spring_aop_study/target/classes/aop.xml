@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       ">
+
+    <bean id="logUtil" class="com.chenxk.util.LogUtil">
+    </bean>
+    <bean id="securityAspect" class="com.chenxk.util.SecurityAspect"></bean>
+    <bean id="myCalculator" class="com.chenxk.service.MyCalculator"></bean>
+    <aop:config>
+        <aop:pointcut id="globalPoint" expression="execution(public int com.chenxk.service.MyCalculator.*(int, int))"/>
+        <aop:aspect ref="logUtil">
+            <aop:pointcut id="myPoint" expression="execution(public int com.chenxk.service.MyCalculator.*(int, int))"/>
+            <aop:before method="start" pointcut-ref="myPoint"></aop:before>
+            <aop:after method="end" pointcut-ref="myPoint"></aop:after>
+            <aop:after-returning method="stop" pointcut-ref="myPoint" returning="result"></aop:after-returning>
+            <aop:after-throwing method="logException" pointcut-ref="myPoint" throwing="exception"></aop:after-throwing>
+        </aop:aspect>
+        <aop:aspect ref="securityAspect">
+            <aop:before method="start" pointcut-ref="globalPoint"></aop:before>
+            <aop:after method="end" pointcut-ref="globalPoint"></aop:after>
+            <aop:after-returning method="stop" pointcut-ref="globalPoint" returning="result"></aop:after-returning>
+            <aop:after-throwing method="logException" pointcut-ref="globalPoint" throwing="exception"></aop:after-throwing>
+        </aop:aspect>
+    </aop:config>
+
+
+
+</beans>

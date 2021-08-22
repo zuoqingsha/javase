@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+<!--    <bean id="personController" class="com.chenxk.controller.PersonController">-->
+
+<!--    </bean>-->
+<!--    当使用注解的时候，可以在当前类的上面添加某些注解标识
+        @Component：组件，理论上可以在任意的类上进行添加，在扫描的时候都会完成bean的注册
+        @Controller：放置在控制层，用来接受用户的请求
+        @Service：放置在业务逻辑层
+        @Repository：放置在数据访问层
+        这四个注解标识卸载类上面的时候都可以完成注册bean的功能，但是这些规定并不是spring识别的标识
+        在spring程序运行的过程中，不会对这四个注解做任何区分，看起来是一样的，都会完成bean的注册功能
+        在实际开发过程中，最好能分清楚，提高代码的可读性。
+        所以，最偷懒的方式是，给所有需要注册的bean类上添加@Component注解
+
+        在使用注解的时候，还需要告诉spring该从哪个包进行扫描,需要导入context命名空间
+        -->
+    <context:component-scan base-package="com.chenxk"></context:component-scan>
+</beans>
